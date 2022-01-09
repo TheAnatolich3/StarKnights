@@ -12,4 +12,8 @@ set_target_properties(StarKnights PROPERTIES
     CXX_EXTENSIONS NO
 )
 
+add_subdirectory(StarEngine)
+
+target_link_libraries(StarKnights StarEngine)
+
 # TODO: Добавьте тесты и целевые объекты, если это необходимо.
