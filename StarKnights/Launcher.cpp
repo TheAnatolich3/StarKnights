@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <SDL.h>
 #include <stbi/stb_image.h>
+#include <GeneralUtils.hpp>
+#include <box2d/box2d.h>
 
 int main(int argc, char* argv[])
 {
