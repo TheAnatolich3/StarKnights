@@ -298,24 +298,6 @@ namespace utils
 		APP2 = 284,
 		NUM_SCANCODES = 512
 	};
-
-	std::string read_file(const std::string_view file_name)
-	{
-		std::string line, text;
-		std::ifstream in(file_name.data());
-
-		if (in.is_open())
-		{
-			while (!in.eof())
-			{
-				getline(in, line);
-				text += line;
-				text += '\n';
-			}
-		}
-		in.close();
-		return text;
-	}
 }
 
 #endif GENERAL_UTILS_HPP

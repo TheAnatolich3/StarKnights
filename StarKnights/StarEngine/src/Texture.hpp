@@ -9,6 +9,7 @@ public:
     explicit Texture(glm::vec2 size);
     virtual ~Texture() = default;
 
+    glm::vec2 getSize() const;
 protected:
     glm::vec2 _size;
 };

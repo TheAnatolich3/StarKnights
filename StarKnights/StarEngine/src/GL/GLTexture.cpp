@@ -45,3 +45,8 @@ void GLTexture::active()
 {
 	glBindTexture(GL_TEXTURE_2D, _id);
 }
+
+uint32_t GLTexture::getId() const
+{
+	return _id;
+}

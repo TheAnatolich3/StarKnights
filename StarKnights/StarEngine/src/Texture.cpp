@@ -5,3 +5,8 @@ Texture::Texture(glm::vec2 size)
 {
 
 }
+
+glm::vec2 Texture::getSize() const
+{
+    return _size;
+}

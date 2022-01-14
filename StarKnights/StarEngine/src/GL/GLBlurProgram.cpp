@@ -1,5 +1,5 @@
 #include <GeneralUtils.hpp>
-#include "GLDrawProgram.hpp"
+#include "GLBlurProgram.hpp"
 
 std::string read_file(const std::string_view file_name)
 {
@@ -19,7 +19,7 @@ std::string read_file(const std::string_view file_name)
 	return text;
 }
 
-GLDrawProgram::GLDrawProgram()
+GLBlurProgram::GLBlurProgram()
 	: GLProgram(read_file("../../../../GalaxyBattles/EtanolEngine/src/shader.vert"),
 		read_file("../../../../GalaxyBattles/EtanolEngine/src/frag_shader.vert"))
 {

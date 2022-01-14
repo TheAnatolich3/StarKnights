@@ -10,6 +10,7 @@ public:
     explicit GLTexture(Bitmap bitmap);
     void active();
 
+    uint32_t getId() const;
 private:
     uint32_t _id;
 };

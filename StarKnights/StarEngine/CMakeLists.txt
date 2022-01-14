@@ -27,7 +27,7 @@ add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/GL/GLDrawProgram.hpp" 
 							  "src/GL/GLDrawProgram.cpp" 
 							  "src/Node.hpp" 
-							  "src/Node.cpp" "src/SchedulerManager.hpp" "src/SchedulerManager.cpp" "src/ActionManager.hpp" "src/ActionManager.cpp")
+							  "src/Node.cpp" "src/SchedulerManager.hpp" "src/SchedulerManager.cpp" "src/ActionManager.hpp" "src/ActionManager.cpp" "src/GL/GLBlurProgram.hpp" "src/GL/GLBlurProgram.cpp" "src/FrameBuffer.hpp" "src/FrameBuffer.cpp" "src/GL/GLFrameBuffer.hpp" "src/GL/GLFrameBuffer.cpp")
 
 #SDL
 if(NOT IOS)
