@@ -4,7 +4,6 @@ add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/Engine.cpp" 
 							  "src/Texture.hpp" 
 							  "src/Texture.cpp" 
-							  "utils/GeneralUtils.hpp" 
 							  "src/VertexBuffer.hpp" 
 							  "src/MeshData.hpp" 
 							  "src/ShaderProgram.hpp" 
@@ -27,7 +26,7 @@ add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/GL/GLDrawProgram.hpp" 
 							  "src/GL/GLDrawProgram.cpp" 
 							  "src/Node.hpp" 
-							  "src/Node.cpp" "src/SchedulerManager.hpp" "src/SchedulerManager.cpp" "src/ActionManager.hpp" "src/ActionManager.cpp" "src/GL/GLBlurProgram.hpp" "src/GL/GLBlurProgram.cpp" "src/FrameBuffer.hpp" "src/FrameBuffer.cpp" "src/GL/GLFrameBuffer.hpp" "src/GL/GLFrameBuffer.cpp")
+							  "src/Node.cpp" "src/SchedulerManager.hpp" "src/SchedulerManager.cpp" "src/ActionManager.hpp" "src/ActionManager.cpp" "src/GL/GLBlurProgram.hpp" "src/GL/GLBlurProgram.cpp" "src/FrameBuffer.hpp" "src/FrameBuffer.cpp" "src/GL/GLFrameBuffer.hpp" "src/GL/GLFrameBuffer.cpp" "src/Utils/GeneralUtils.hpp" "src/Shaders/ShaderUtils.hpp")
 
 #SDL
 if(NOT IOS)

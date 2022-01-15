@@ -1,7 +1,7 @@
 #include <Engine.hpp>
 #include <EventsManager.hpp>
 #include <SDL.h>
-#include <GeneralUtils.hpp>
+#include <Utils/GeneralUtils.hpp>
 #include <GL/GLRenderer.hpp>
 #include "SDLWindow.hpp"
 

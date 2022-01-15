@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include <GeneralUtils.hpp>
+#include <Utils/GeneralUtils.hpp>
 
 class MeshData
 {

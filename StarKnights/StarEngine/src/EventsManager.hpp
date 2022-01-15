@@ -4,7 +4,7 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <string>
-#include <GeneralUtils.hpp>
+#include <Utils/GeneralUtils.hpp>
 
 enum class Action
 {
