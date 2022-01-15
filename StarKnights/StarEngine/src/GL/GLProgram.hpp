@@ -14,6 +14,8 @@ public:
     std::shared_ptr<TextureUniform> createTextureUniform(std::string_view name) override;
     std::shared_ptr<Mat3Uniform> createMat3Uniform(std::string_view name) override;
     std::shared_ptr<Vec2Uniform> createVec2Uniform(std::string_view name) override;
+    std::shared_ptr<Vec3Uniform> createVec3Uniform(std::string_view name) override;
+    std::shared_ptr<FloatUniform> createFloatUniform(std::string_view name) override;
 
     void activate() override;
 
@@ -30,6 +32,7 @@ class GLTextureUniform : public TextureUniform
 public:
     explicit GLTextureUniform(const std::shared_ptr<GLProgram>& program, std::string_view name);
     void activate() override;
+    void activateWithSlot(size_t) override;
 
 private:
     int32_t _location;
@@ -55,5 +58,24 @@ private:
     int32_t _location;
 };
 
+class GLVec3Uniform : public Vec3Uniform
+{
+public:
+    explicit GLVec3Uniform(const std::shared_ptr<GLProgram>& program, std::string_view name);
+    void activate() override;
+
+private:
+    int32_t _location;
+};
+
+class GLFloatUniform : public FloatUniform
+{
+public:
+    explicit GLFloatUniform(const std::shared_ptr<GLProgram>& program, std::string_view name);
+    void activate() override;
+
+private:
+    int32_t _location;
+};
 
 #endif GLPROGRAM_HPP

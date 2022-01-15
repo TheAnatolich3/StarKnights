@@ -26,7 +26,7 @@ add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/GL/GLDrawProgram.hpp" 
 							  "src/GL/GLDrawProgram.cpp" 
 							  "src/Node.hpp" 
-							  "src/Node.cpp" "src/SchedulerManager.hpp" "src/SchedulerManager.cpp" "src/ActionManager.hpp" "src/ActionManager.cpp" "src/GL/GLBlurProgram.hpp" "src/GL/GLBlurProgram.cpp" "src/FrameBuffer.hpp" "src/FrameBuffer.cpp" "src/GL/GLFrameBuffer.hpp" "src/GL/GLFrameBuffer.cpp" "src/Utils/GeneralUtils.hpp" "src/Shaders/ShaderUtils.hpp")
+							  "src/Node.cpp" "src/SchedulerManager.hpp" "src/SchedulerManager.cpp" "src/ActionManager.hpp" "src/ActionManager.cpp" "src/GL/GLBlurProgram.hpp" "src/GL/GLBlurProgram.cpp" "src/FrameBuffer.hpp" "src/FrameBuffer.cpp" "src/GL/GLFrameBuffer.hpp" "src/GL/GLFrameBuffer.cpp" "src/Utils/GeneralUtils.hpp" "src/Shaders/ShaderUtils.hpp" "src/GL/GLParticleBuffer.hpp" "src/GL/GLParticleBuffer.cpp" "src/ParticleBuffer.hpp" "src/ParticleBuffer.cpp" "src/GL/GLParticleProgram.hpp" "src/GL/GLParticleProgram.cpp" "src/GL/GLPpProgram.hpp" "src/GL/GLPpProgram.cpp" "src/Utils/ShaderUtils.hpp")
 
 #SDL
 if(NOT IOS)

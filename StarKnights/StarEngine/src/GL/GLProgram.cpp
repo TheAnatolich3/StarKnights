@@ -105,17 +105,31 @@ std::shared_ptr<Vec2Uniform> GLProgram::createVec2Uniform(std::string_view name)
     return std::make_shared<GLVec2Uniform>(std::static_pointer_cast<GLProgram>(shared_from_this()), name);
 }
 
-void GLTextureUniform::activate()
+std::shared_ptr<Vec3Uniform> GLProgram::createVec3Uniform(std::string_view name)
 {
+    return std::make_shared<GLVec3Uniform>(std::static_pointer_cast<GLProgram>(shared_from_this()), name);
+}
+
+std::shared_ptr<FloatUniform> GLProgram::createFloatUniform(std::string_view name)
+{
+    return std::make_shared<GLFloatUniform>(std::static_pointer_cast<GLProgram>(shared_from_this()), name);
+}
+
+void GLTextureUniform::activateWithSlot(size_t slot)
+{
+    Uniform::activate();
     auto glTexture = std::dynamic_pointer_cast<GLTexture>(texture);
     if (glTexture)
     {
-        //TODO: diff texture slots
-        glActiveTexture(GL_TEXTURE0);
+        glActiveTexture(GL_TEXTURE0 + slot);
         glTexture->active();
-
-        glUniform1i(_location, 0);
+        glUniform1i(_location, slot);
     }
+}
+
+void GLTextureUniform::activate()
+{
+    activateWithSlot(0);
 }
 
 GLTextureUniform::GLTextureUniform(const std::shared_ptr<GLProgram>& program, std::string_view name)
@@ -130,6 +144,7 @@ GLMat3Uniform::GLMat3Uniform(const std::shared_ptr<GLProgram>& program, std::str
 
 void GLMat3Uniform::activate()
 {
+    Uniform::activate();
     glUniformMatrix3fv(_location, 1, GL_FALSE, glm::value_ptr(value));
 }
 
@@ -140,5 +155,28 @@ GLVec2Uniform::GLVec2Uniform(const std::shared_ptr<GLProgram>& program, std::str
 
 void GLVec2Uniform::activate()
 {
+    Uniform::activate();
     glUniform2f(_location, value.x, value.y);
+}
+
+GLVec3Uniform::GLVec3Uniform(const std::shared_ptr<GLProgram>& program, std::string_view name)
+{
+    _location = glGetUniformLocation(program->getProgramId(), name.data());
+}
+
+void GLVec3Uniform::activate()
+{
+    Uniform::activate();
+    glUniform3f(_location, value.x, value.y, value.z);
+}
+
+GLFloatUniform::GLFloatUniform(const std::shared_ptr<GLProgram>& program, std::string_view name)
+{
+    _location = glGetUniformLocation(program->getProgramId(), name.data());
+}
+
+void GLFloatUniform::activate()
+{
+    Uniform::activate();
+    glUniform1f(_location, value);
 }

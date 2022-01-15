@@ -1,4 +1,4 @@
-#include <Shaders/ShaderUtils.hpp>
+#include <Utils/ShaderUtils.hpp>
 #include "GLDrawProgram.hpp"
 
 GLDrawProgram::GLDrawProgram()
