@@ -7,6 +7,12 @@
 
 namespace utils
 {
+	inline size_t genUniqueObjectId()
+	{
+		static size_t id = 0;
+		return ++id;
+	}
+
     struct color
     {
         explicit color(std::uint32_t rgba) : _rgba(rgba) {}

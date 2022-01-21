@@ -4,7 +4,9 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (StarKnights "Launcher.cpp")
+add_executable (StarKnights "Launcher.cpp" 
+                            "Game/Earth.hpp" 
+                            "Game/Earth.cpp")
 
 set_target_properties(StarKnights PROPERTIES
     CXX_STANDARD 17

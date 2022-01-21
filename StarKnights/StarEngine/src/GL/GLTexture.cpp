@@ -32,13 +32,22 @@ GLTexture::GLTexture(Bitmap bitmap)
 	}();
 
 	glTexImage2D(GL_TEXTURE_2D, 0, internal_format, bitmap.getSize().x, bitmap.getSize().y, 0,
-		format, GL_UNSIGNED_BYTE, bitmap.getImage().data());
+		format, GL_UNSIGNED_BYTE, bitmap.getImage().size() == 0 ? nullptr : bitmap.getImage().data());
 
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	glGenerateMipmap(GL_TEXTURE_2D);
+	if (bitmap.getImage().size() != 0)
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glGenerateMipmap(GL_TEXTURE_2D);
+	}
+	else
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	}
 }
 
 void GLTexture::active()

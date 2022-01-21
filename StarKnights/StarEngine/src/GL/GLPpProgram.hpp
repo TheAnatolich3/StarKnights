@@ -6,7 +6,7 @@
 class GLPpProgram final : public GLProgram
 {
 public:
-    GLPpProgram();
+    explicit GLPpProgram();
 };
 
 

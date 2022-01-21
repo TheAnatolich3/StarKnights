@@ -6,6 +6,7 @@
 #include <vector>
 #include <string_view>
 #include <optional>
+#include <SchedulerManager.hpp>
 
 class Engine;
 
@@ -37,11 +38,16 @@ public:
 	const glm::vec2& getContentSize() const;
 	void setContentSize(const glm::vec2& contentSize);
 
-	glm::mat3 getTransform();
-	std::vector<std::shared_ptr<Node>> getChilds();
+	void scheduleUpdate();
+	void uncheduleUpdate();
 
-	int getOrder() const;
-	void setOrder(int value);
+	virtual void update(fseconds) {}
+
+	uint32_t getRenderMask() const;
+	void setRenderMask(uint32_t renderMask);
+
+	glm::mat3 getTransform();
+	//void runAction(std::shared_ptr<Action> action);
 protected:
 	virtual void visitSelf() {};
 
@@ -55,8 +61,10 @@ protected:
 	glm::vec2 _anchor = glm::vec2(0.5f);
 	glm::float32 _rotation = 0.0f;
 	glm::vec2 _contentSize = glm::vec2(0.0f);
+
 	std::optional<glm::mat3> _transform;
 	int _zOrder = 0;
+	std::uint32_t _renderMask{ 0x0 };
 };
 
 #endif NODE_HPP

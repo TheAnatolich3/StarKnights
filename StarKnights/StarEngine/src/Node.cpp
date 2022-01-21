@@ -1,14 +1,18 @@
 #include <glm/gtx/matrix_transform_2d.hpp>
 #include <algorithm>
 #include <Engine.hpp>
+#include <Utils/GeneralUtils.hpp>
+//#include <ActionManager.hpp>
 #include "Node.hpp"
 
 Node::Node(const Engine& engine)
-	: _engine(engine)
+	: _engine(engine),
+	_id(utils::genUniqueObjectId())
 {}
 
 Node::~Node()
 {
+	//this->uncheduleUpdate();
 	for (auto& node : _nodes)
 	{
 		node->_parent = nullptr;
@@ -20,8 +24,7 @@ void Node::addNode(std::shared_ptr<Node> node)
 	if (node != nullptr)
 	{
 		node->_parent = this;
-		_nodes.insert(std::upper_bound(_nodes.begin(), _nodes.end(), node, [](std::shared_ptr<Node> lfs, std::shared_ptr<Node> rhs) {
-			return lfs->getOrder() < rhs->getOrder(); }), std::move(node));
+		_nodes.push_back(node);
 	}
 }
 
@@ -43,16 +46,11 @@ Node* Node::getParent()
 
 void Node::visit()
 {
-	auto divide_bound = std::upper_bound(_nodes.begin(), _nodes.end(), this, [](Node* lfs, std::shared_ptr<Node> rhs) {
-		return lfs->getOrder() >= rhs->getOrder(); });
-	for (auto iter = _nodes.begin(); iter != divide_bound; ++iter)
-	{
-		iter->get()->visit();
-	}
 	this->visitSelf();
-	for (auto iter = divide_bound; iter != _nodes.end(); ++iter)
+
+	for (auto& node : _nodes)
 	{
-		iter->get()->visit();
+		node->visit();
 	}
 }
 
@@ -132,17 +130,31 @@ void Node::setContentSize(const glm::vec2& contentSize)
 	_contentSize = contentSize;
 }
 
-std::vector<std::shared_ptr<Node>> Node::getChilds()
+void Node::scheduleUpdate()
 {
-	return _nodes;
+	_engine.schedulerManager().scheduleUpdate([this](fseconds delta)
+	{
+		this->update(delta);
+	}, _id);
 }
 
-int Node::getOrder() const
+void Node::uncheduleUpdate()
 {
-	return _zOrder;
+	_engine.schedulerManager().stop(_id);
 }
 
-void Node::setOrder(int value)
+uint32_t Node::getRenderMask() const
 {
-	_zOrder = value;
+	return _renderMask;
 }
+
+void Node::setRenderMask(uint32_t renderMask)
+{
+	_renderMask = renderMask;
+}
+
+//void Node::runAction(std::shared_ptr<Action> action)
+//{
+//	action->startWithTarget(this);
+//	_engine.actionManager().addAction(std::move(action));
+//}

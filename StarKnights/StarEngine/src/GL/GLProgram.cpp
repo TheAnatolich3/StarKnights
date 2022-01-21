@@ -1,13 +1,37 @@
 #include <iostream>
 #include <GL/glew.h>
+#include <fstream>
+#include <string>
+#include <string_view>
 #include <glm/gtc/type_ptr.hpp>
 #include <GL/GLTexture.hpp>
 #include "GLProgram.hpp"
 
+std::string read_shader(const std::string_view file_name)
+{
+    std::string line, text;
+    std::ifstream in(file_name.data());
+
+    if (in.is_open())
+    {
+        while (!in.eof())
+        {
+            getline(in, line);
+            text += line;
+            text += '\n';
+        }
+    }
+    in.close();
+    return text;
+}
+
 GLProgram::GLProgram(std::string_view vs_str, std::string_view ps_str)
 {
-    const char* vs = vs_str.data();
-    const char* ps = ps_str.data();
+    std::string v_str = read_shader(vs_str);
+    std::string p_str = read_shader(ps_str);
+    const char* vs = v_str.data();
+    const char* ps = p_str.data();
+
     _vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(_vertexShader, 1, &vs, nullptr);
     glCompileShader(_vertexShader);

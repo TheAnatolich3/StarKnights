@@ -14,10 +14,13 @@ public:
     virtual ~GLVertexBuffer();
 
     void draw(size_t count, size_t pos);
+    void draw();
 private:
-    uint32_t _VAO = 0;
-    uint32_t _VBO = 0;
-    uint32_t _IBO = 0;
+    uint32_t _VAO = -1;
+    uint32_t _VBO = -1;
+    uint32_t _IBO = -1;
+
+    uint32_t _count;
 
     const Engine& _engine;
 };

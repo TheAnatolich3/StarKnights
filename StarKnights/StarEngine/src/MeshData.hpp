@@ -12,7 +12,7 @@ public:
 	{
 		glm::vec2 position;
 		glm::vec2 texcoord;
-		utils::color color{ glm::vec4(1,1,1,1) };
+		utils::color color{ glm::vec4(1) };
 	};
 
 	std::vector<Vertex> vertices;
