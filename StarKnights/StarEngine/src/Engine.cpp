@@ -5,6 +5,7 @@
 #include <Node.hpp>
 #include <SchedulerManager.hpp>
 #include <box2d/box2d.h>
+#include <AudioManager.hpp>
 #include "Engine.hpp"
 
 Engine::Engine()
@@ -23,15 +24,13 @@ void Engine::init(std::string_view name_window, size_t width, size_t height)
 {
 	_isActive = true;
 	_virtualResolution = glm::vec2(width, height);
-	_camera = std::make_shared<Node>(*this);
 	_scene = std::make_shared<Node>(*this);
-	_camera->setContentSize(_virtualResolution);
 
 	_window = std::make_unique<SDLWindow>(*this, name_window.data(), width, height);
 	_renderer = _window->createRenderer();
 	_eventsManager = std::make_unique<EventsManager>();
 	_eventsManager->add_delegate(this);
-
+	_audioManager = std::make_unique<AudioManager>();
 	_renderer->init();
 }
 
@@ -40,6 +39,7 @@ void Engine::update() {
 	_scene->visit();
 	_renderer->draw();
 	_window->swap();
+	_audioManager->update();
 }
 
 
@@ -71,13 +71,8 @@ glm::vec2 Engine::getVirtualResolution() const
 void Engine::setVirtualResolution(glm::vec2 virtualResolution) const
 {
 	_virtualResolution = virtualResolution;
-	_camera->setContentSize(_virtualResolution);
 }
 
-std::shared_ptr<Node> Engine::getCamera() const
-{
-	return _camera;
-}
 
 const SchedulerManager& Engine::schedulerManager() const
 {
@@ -89,7 +84,12 @@ std::shared_ptr<Node> Engine::scene()
 	return _scene;
 }
 
-const b2World& Engine::world() const
+b2World& Engine::world() const
 {
 	return *_world;
+}
+
+const AudioManager& Engine::audioManager() const
+{
+	return *_audioManager;
 }

@@ -32,14 +32,14 @@ GLRenderer::GLRenderer(const Engine& engine, SDL_Window* window)
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
+//#if GL33
 	glewExperimental = GL_TRUE;
 	GLenum res = glewInit();
 	if (res != GLEW_OK)
 	{
 		throw std::runtime_error("Glew error");
 	}
-
+//#endif
 	glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 }
 
@@ -223,6 +223,12 @@ std::shared_ptr<VertexBuffer> GLRenderer::createVertexBuffer(MeshData data) cons
 {
 	return std::make_shared<GLVertexBuffer>(_engine, data);
 }
+
+//std::shared_ptr<VertexBuffer> GLRender::create_vertex_buffer(const VertexData&) const
+//{
+//	return std::shared_ptr<VertexBuffer>();
+//}
+
 
 std::shared_ptr<ShaderProgram> GLRenderer::createProgram(std::string_view name) const
 {
