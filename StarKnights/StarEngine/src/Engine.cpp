@@ -6,6 +6,7 @@
 #include <SchedulerManager.hpp>
 #include <box2d/box2d.h>
 #include <AudioManager.hpp>
+#include <UIManager.hpp>
 #include "Engine.hpp"
 
 Engine::Engine()
@@ -29,14 +30,17 @@ void Engine::init(std::string_view name_window, size_t width, size_t height)
 	_window = std::make_unique<SDLWindow>(*this, name_window.data(), width, height);
 	_renderer = _window->createRenderer();
 	_eventsManager = std::make_unique<EventsManager>();
-	_eventsManager->add_delegate(this);
 	_audioManager = std::make_unique<AudioManager>();
+	_UIManager = std::make_unique<UIManager>(*this);
+	_eventsManager->add_delegate(_UIManager.get());
+	_eventsManager->add_delegate(this);
 	_renderer->init();
 }
 
 void Engine::update() {
 	_window->update();
 	_scene->visit();
+	_UIManager->visit();
 	_renderer->draw();
 	_window->swap();
 	_audioManager->update();
@@ -92,4 +96,9 @@ b2World& Engine::world() const
 const AudioManager& Engine::audioManager() const
 {
 	return *_audioManager;
+}
+
+std::shared_ptr<UIManager> Engine::UI_Manager() const
+{
+	return _UIManager;
 }

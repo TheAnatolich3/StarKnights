@@ -8,10 +8,11 @@
 class Engine;
 class Sound;
 class Button;
+class UserMenu;
 
 class AudioMenu : public Node, public EventsManager::Delegate{
 public:
-	explicit AudioMenu(const Engine&);
+	explicit AudioMenu(const Engine&, const UserMenu&);
 	~AudioMenu() = default;
 	void init();
 	void add_song(std::string_view filepath);
@@ -26,6 +27,8 @@ public:
 	void setVolume(float);
 private:
 	const Engine& _engine;
+	const UserMenu& _menu;
+
 	std::vector<std::shared_ptr<Sound>> _playlist;
 	std::shared_ptr<Sound> _current_song;
 

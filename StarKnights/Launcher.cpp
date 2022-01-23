@@ -5,6 +5,8 @@
 #include <Sprite.hpp>
 #include <Window.hpp>
 #include <Button.hpp>
+#include <UIManager.hpp>
+#include "Game/UserMenu.hpp"
 #include "Game/AudioMenu.hpp"
 #include "Game/Earth.hpp"
 
@@ -12,8 +14,10 @@ int main(int argc, char* argv[])
 {
 	Engine engine{};
 	engine.init("StarKnights", 1280, 720);
+	std::shared_ptr<UserMenu> user_menu = std::make_shared<UserMenu>(engine);
+	user_menu->init();
 
-	std::shared_ptr<AudioMenu> audio_menu = std::make_shared<AudioMenu>(engine);
+	std::shared_ptr<AudioMenu> audio_menu = std::make_shared<AudioMenu>(engine, *user_menu.get());
 	engine.scene()->addNode(audio_menu);
 	audio_menu->init();
 	audio_menu->play();
@@ -33,12 +37,11 @@ int main(int argc, char* argv[])
 		engine.scene()->addNode(back);
 	}*/
 
-
-		
 	while (engine.isActive())
 	{
 		engine.update();
 		audio_menu->update();
+		user_menu->update();
 	}
 	return 0;
 }

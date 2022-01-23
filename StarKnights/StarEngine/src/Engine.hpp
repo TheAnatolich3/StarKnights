@@ -10,6 +10,7 @@ class Window;
 class Node;
 class Renderer;
 class SchedulerManager;
+class UIManager;
 class AudioManager;
 class b2World;
 
@@ -37,6 +38,7 @@ public:
 	[[nodiscard]] b2World& world() const;
 
 	std::shared_ptr<Node> scene();
+	std::shared_ptr<UIManager> UI_Manager() const;
 private:
 	bool _isActive = false;
 
@@ -47,6 +49,7 @@ private:
 	std::unique_ptr<SchedulerManager> _schedulerManager;
 	std::unique_ptr<AudioManager> _audioManager;
 	std::unique_ptr<Renderer> _renderer;
+	std::shared_ptr<UIManager> _UIManager;
 
 	mutable glm::vec2 _virtualResolution;
 };

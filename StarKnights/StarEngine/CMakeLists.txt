@@ -48,7 +48,7 @@ add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/GL/GLPpProgram.cpp" 
 							  "src/VertexData.hpp" 
 							  "src/Sprite.hpp" 
-							  "src/Sprite.cpp" "src/PhysicsSprite.hpp" "src/PhysicsSprite.cpp" "src/Sound.hpp" "src/Sound.cpp" "src/AudioManager.hpp" "src/AudioManager.cpp" "src/Button.hpp" "src/Button.cpp")
+							  "src/Sprite.cpp" "src/PhysicsSprite.hpp" "src/PhysicsSprite.cpp" "src/Sound.hpp" "src/Sound.cpp" "src/AudioManager.hpp" "src/AudioManager.cpp" "src/Button.hpp" "src/Button.cpp" "src/UIManager.hpp" "src/UIManager.cpp" "src/MenuItem.hpp" "src/MenuItem.cpp")
 
 #SDL
 if(NOT IOS)

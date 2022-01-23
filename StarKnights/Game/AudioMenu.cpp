@@ -2,10 +2,11 @@
 #include <Sound.hpp>
 #include <Button.hpp>
 #include <AudioManager.hpp>
+#include "UserMenu.hpp"
 #include "AudioMenu.hpp"
 
-AudioMenu::AudioMenu(const Engine& engine)
-	: _engine(engine), Node(engine)
+AudioMenu::AudioMenu(const Engine& engine, const UserMenu& menu)
+	: _engine(engine), _menu(menu), Node(engine)
 {
 	_pause_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/pause_80.png");
 	_play_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/play_80.png");
@@ -116,6 +117,8 @@ void AudioMenu::update()
 		_play_button->setHandleStatus();
 		_pause_button->setHandleStatus();
 	}
+
+	setVolume(_menu.getVolume());
 }
 
 void AudioMenu::setVolume(float volume)
