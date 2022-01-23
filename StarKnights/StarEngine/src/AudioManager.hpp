@@ -12,7 +12,7 @@ class AudioManager
 {
 public:
 	AudioManager();
-	std::shared_ptr<Sound> createSound(std::string_view file_name, bool is_loop, int volume) const;
+	std::shared_ptr<Sound> createSound(std::string_view file_name, bool is_loop, float volume) const;
 	void update();
 
 private:

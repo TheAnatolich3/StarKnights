@@ -5,6 +5,7 @@
 #include <Sprite.hpp>
 #include <Window.hpp>
 #include <Button.hpp>
+#include "Game/AudioMenu.hpp"
 #include "Game/Earth.hpp"
 
 int main(int argc, char* argv[])
@@ -12,22 +13,10 @@ int main(int argc, char* argv[])
 	Engine engine{};
 	engine.init("StarKnights", 1280, 720);
 
-	std::shared_ptr<Button> pause_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/pause_80.png");
-	std::shared_ptr<Button> play_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/play_80.png");
-	std::shared_ptr<Button> prev_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/prev_80.png");
-	std::shared_ptr<Button> next_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/next_80.png");
-	std::cout << play_button->getAnchor().x << " " << play_button->getAnchor().y << std::endl;
-	prev_button->setScale(glm::vec2(0.7f));
-	prev_button->setPosition(prev_button->getContentSize() * prev_button->getScale() * glm::vec2(0.5f, 0.5f));
-	play_button->setScale(glm::vec2(0.7f));
-	play_button->setPosition(play_button->getContentSize() * play_button->getScale() * glm::vec2(1.5f, 0.5f));
-	next_button->setScale(glm::vec2(0.7f));
-	next_button->setPosition(next_button->getContentSize() * next_button->getScale() * glm::vec2(2.5f, 0.5f));
-	pause_button->setScale(glm::vec2(0.7f));
-	pause_button->setPosition(pause_button->getContentSize() * pause_button->getScale() * glm::vec2(1.5f, 0.5f));
-	engine.scene()->addNode(play_button);
-	engine.scene()->addNode(prev_button);
-	engine.scene()->addNode(next_button);
+	std::shared_ptr<AudioMenu> audio_menu = std::make_shared<AudioMenu>(engine);
+	engine.scene()->addNode(audio_menu);
+	audio_menu->init();
+	audio_menu->play();
 
 	//auto back = std::make_shared<Sprite>(engine, "../../../../StarKnights/res/land.jpg");
 	////back->setPosition(glm::vec2(10.0f, 0.0f));
@@ -49,6 +38,7 @@ int main(int argc, char* argv[])
 	while (engine.isActive())
 	{
 		engine.update();
+		audio_menu->update();
 	}
 	return 0;
 }

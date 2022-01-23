@@ -33,7 +33,7 @@ void Button::handle_event(MouseEvent me)
 		&& me.button == MouseButton::Left)
 	{
 		this->setScale(glm::vec2(0.65f));
-		status = !status;
+		_status = false;
 	}
 	else
 	{
@@ -43,5 +43,10 @@ void Button::handle_event(MouseEvent me)
 
 bool Button::getStatus() const
 {
-	return status;
+	return _status;
+}
+
+void Button::setHandleStatus()
+{
+	_status = true;
 }

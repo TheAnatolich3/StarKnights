@@ -15,8 +15,9 @@ public:
 	void handle_event(MouseEvent) override;
 	void visitSelf() override;
 	bool getStatus() const;
+	void setHandleStatus();
 private:
-	bool status = false;
+	bool _status = true;
 	std::shared_ptr<Sprite> _body;
 };
 #endif BUTTON_NPP

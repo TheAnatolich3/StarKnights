@@ -25,7 +25,7 @@ void AudioManager::audio_callback(void* userdata, uint8_t* stream, int len)
 					sound->_data + sound->_pos,
 					AUDIO_S16LSB,
 					amount,
-					sound->_volume);
+					sound->_volume * SDL_MIX_MAXVOLUME);
 
 				sound->_pos += amount;
 
@@ -81,7 +81,7 @@ AudioManager::AudioManager()
 	}
 }
 
-std::shared_ptr<Sound> AudioManager::createSound(std::string_view file_name, bool is_loop, int volume) const
+std::shared_ptr<Sound> AudioManager::createSound(std::string_view file_name, bool is_loop, float volume) const
 {
 	std::shared_ptr<Sound> sound = std::make_shared<Sound>(file_name, is_loop, volume);
 	_buffers.push_back(sound);
