@@ -1,7 +1,9 @@
+#include <Engine.hpp>
+#include <FileManager.hpp>
 #include "GLSpriteProgram.hpp"
 
-GLSpriteProgram::GLSpriteProgram()
+GLSpriteProgram::GLSpriteProgram(const Engine& engine)
 	: GLProgram(
-		"../../../../StarKnights/StarEngine/src/Shaders/sprite_vertex_shader.vert",
-		"../../../../StarKnights/StarEngine/src/Shaders/sprite_frag_shader.vert")
+		engine.fileManager().resourceLocation("sprite_vertex_shader.vert"),
+		engine.fileManager().resourceLocation("sprite_frag_shader.vert"))
 { }

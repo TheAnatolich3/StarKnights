@@ -5,10 +5,12 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+class Engine;
+
 class Bitmap
 {
 public:
-	explicit Bitmap(std::string_view filepath);
+	explicit Bitmap(const Engine& engine, std::string_view filepath);
 	explicit Bitmap(int count_channels, std::vector<unsigned char> data, glm::vec2 size);
 	[[nodiscard]] const std::vector<unsigned char>& getImage() const;
 

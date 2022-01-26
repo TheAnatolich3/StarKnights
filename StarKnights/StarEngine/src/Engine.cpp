@@ -7,10 +7,12 @@
 #include <box2d/box2d.h>
 #include <AudioManager.hpp>
 #include <UIManager.hpp>
+#include <FileManager.hpp>
 #include "Engine.hpp"
 
 Engine::Engine()
 {
+	_fileManager = std::make_unique<FileManager>();
 	_world = std::make_unique<b2World>(b2Vec2(0.0f, -10.0f));
 	_schedulerManager = std::make_unique<SchedulerManager>();
 }
@@ -30,7 +32,7 @@ void Engine::init(std::string_view name_window, size_t width, size_t height)
 	_window = std::make_unique<SDLWindow>(*this, name_window.data(), width, height);
 	_renderer = _window->createRenderer();
 	_eventsManager = std::make_unique<EventsManager>();
-	_audioManager = std::make_unique<AudioManager>();
+	_audioManager = std::make_unique<AudioManager>(*this);
 	_UIManager = std::make_unique<UIManager>(*this);
 	_eventsManager->add_delegate(_UIManager.get());
 	_eventsManager->add_delegate(this);
@@ -101,4 +103,9 @@ const AudioManager& Engine::audioManager() const
 std::shared_ptr<UIManager> Engine::UI_Manager() const
 {
 	return _UIManager;
+}
+
+const FileManager& Engine::fileManager() const
+{
+	return *_fileManager;
 }

@@ -45,8 +45,8 @@ GLRenderer::GLRenderer(const Engine& engine, SDL_Window* window)
 
 void GLRenderer::init()
 {
-	_ppProgram = std::make_shared<GLPpProgram>();
-	_blurProgram = std::make_shared<GLBlurProgram>();
+	_ppProgram = std::make_shared<GLPpProgram>(_engine);
+	_blurProgram = std::make_shared<GLBlurProgram>(_engine);
 
 	_origFbo = std::make_shared<GLFrameBuffer>(_engine, glm::vec2(_engine.window().getWidth(), _engine.window().getHeight()));
 	_bloomFbo = std::make_shared<GLFrameBuffer>(_engine, 0.25f * glm::vec2(_engine.window().getWidth(), _engine.window().getHeight()));
@@ -240,11 +240,11 @@ std::shared_ptr<ShaderProgram> GLRenderer::createProgram(std::string_view name) 
 	std::shared_ptr<ShaderProgram> program = nullptr;
 	if (name == "draw")
 	{
-		program = std::make_shared<GLSpriteProgram>();
+		program = std::make_shared<GLSpriteProgram>(_engine);
 	}
 	else if (name == "particles")
 	{
-		program = std::make_shared<GLParticleProgram>();
+		program = std::make_shared<GLParticleProgram>(_engine);
 	}
 
 	_programs[name_string] = program;

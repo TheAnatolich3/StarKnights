@@ -10,7 +10,7 @@
 Sprite::Sprite(const Engine& engine, std::string_view filepath) 
     : Node(engine)
 {
-    Bitmap bitmap(filepath);
+    Bitmap bitmap(engine, filepath);
 
     _contentSize = bitmap.getSize();
 

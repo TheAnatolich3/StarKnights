@@ -8,10 +8,10 @@
 AudioMenu::AudioMenu(const Engine& engine, const UserMenu& menu)
 	: _engine(engine), _menu(menu), Node(engine)
 {
-	_pause_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/pause_80.png");
-	_play_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/play_80.png");
-	_prev_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/prev_80.png");
-	_next_button = std::make_shared<Button>(engine, "../../../../StarKnights/res/next_80.png");
+	_pause_button = std::make_shared<Button>(engine, "pause_80.png");
+	_play_button = std::make_shared<Button>(engine, "play_80.png");
+	_prev_button = std::make_shared<Button>(engine, "prev_80.png");
+	_next_button = std::make_shared<Button>(engine, "next_80.png");
 	_prev_button->setScale(glm::vec2(0.7f));
 	_prev_button->setPosition(_prev_button->getContentSize() * _prev_button->getScale() * glm::vec2(0.5f, 0.5f));
 	_play_button->setScale(glm::vec2(0.7f));
@@ -131,8 +131,8 @@ void AudioMenu::setVolume(float volume)
 
 void AudioMenu::init()
 {
-	add_song("../../../../StarKnights/res/music/Enemy.wav");
-	add_song("../../../../StarKnights/res/music/One.wav");
-	add_song("../../../../StarKnights/res/music/Trouble.wav");
-	add_song("../../../../StarKnights/res/music/Beautiful.wav");
+	add_song("Enemy.wav");
+	add_song("One.wav");
+	add_song("Trouble.wav");
+	add_song("Beautiful.wav");
 }

@@ -6,7 +6,7 @@
 class GLPpProgram final : public GLProgram
 {
 public:
-    explicit GLPpProgram();
+    explicit GLPpProgram(const Engine& engine);
 };
 
 

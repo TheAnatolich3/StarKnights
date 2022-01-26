@@ -5,6 +5,9 @@
 #include <string_view>
 #include <fstream>
 
+#define XSTRINGIFY(A) STRINGIFY(A)
+#define STRINGIFY(A) #A
+
 namespace utils
 {
 	inline size_t genUniqueObjectId()

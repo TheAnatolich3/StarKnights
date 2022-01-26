@@ -24,7 +24,7 @@ PhysicsSprite::PhysicsSprite(const Engine& engine, std::string_view filepath)
 
     _box->CreateFixture(&boxFixDef);
 
-    Bitmap bitmap(filepath);
+    Bitmap bitmap(engine, filepath);
 
     _contentSize = bitmap.getSize();
 

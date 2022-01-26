@@ -1,6 +1,8 @@
 #include <stdexcept>
 #include <iostream>
 #include <SDL.h>
+#include <Engine.hpp>
+#include <FileManager.hpp>
 #include "AudioManager.hpp"
 
 void AudioManager::audio_callback(void* userdata, uint8_t* stream, int len)
@@ -46,7 +48,8 @@ void AudioManager::audio_callback(void* userdata, uint8_t* stream, int len)
 	audioManager->_lock_buffer.unlock();
 }
 
-AudioManager::AudioManager()
+AudioManager::AudioManager(const Engine& engine):
+	_engine(engine)
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_memset(&_wanted_spec, 0, sizeof(_wanted_spec));
@@ -83,7 +86,7 @@ AudioManager::AudioManager()
 
 std::shared_ptr<Sound> AudioManager::createSound(std::string_view file_name, bool is_loop, float volume) const
 {
-	std::shared_ptr<Sound> sound = std::make_shared<Sound>(file_name, is_loop, volume);
+	std::shared_ptr<Sound> sound = std::make_shared<Sound>(_engine.fileManager().resourceLocation(file_name.data()), is_loop, volume);
 	_buffers.push_back(sound);
 	return sound;
 }

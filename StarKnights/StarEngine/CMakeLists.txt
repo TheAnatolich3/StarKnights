@@ -1,5 +1,7 @@
 set(CMAKE_CXX_STANDARD 17)
 
+add_definitions(-DPROJECT_ROOT_FOLDER=${PROJECT_SOURCE_DIR})
+
 add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/Engine.cpp" 
 							  "src/Texture.hpp" 
@@ -48,7 +50,23 @@ add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/GL/GLPpProgram.cpp" 
 							  "src/VertexData.hpp" 
 							  "src/Sprite.hpp" 
-							  "src/Sprite.cpp" "src/PhysicsSprite.hpp" "src/PhysicsSprite.cpp" "src/Sound.hpp" "src/Sound.cpp" "src/AudioManager.hpp" "src/AudioManager.cpp" "src/Button.hpp" "src/Button.cpp" "src/UIManager.hpp" "src/UIManager.cpp" "src/MenuItem.hpp" "src/MenuItem.cpp")
+							  "src/Sprite.cpp" 
+							  "src/PhysicsSprite.hpp" 
+							  "src/PhysicsSprite.cpp" 
+							  "src/Sound.hpp" 
+							  "src/Sound.cpp" 
+							  "src/AudioManager.hpp" 
+							  "src/AudioManager.cpp" 
+							  "src/Button.hpp" 
+							  "src/Button.cpp" 
+							  "src/UIManager.hpp" 
+							  "src/UIManager.cpp" 
+							  "src/MenuItem.hpp" 
+							  "src/MenuItem.cpp" 
+							  "src/TaskManager.hpp" 
+							  "src/TaskManager.cpp"
+							  "src/Utils/ResourceManager.hpp"
+							  "src/FileManager.hpp" "src/FileManager.cpp")
 
 #SDL
 if(NOT IOS)

@@ -1,7 +1,9 @@
+#include <Engine.hpp>
+#include <FileManager.hpp>
 #include "GLPpProgram.hpp"
 
-GLPpProgram::GLPpProgram()
+GLPpProgram::GLPpProgram(const Engine& engine)
 	: GLProgram(
-		"../../../../StarKnights/StarEngine/src/Shaders/pp_vertex_shader.vert",
-		"../../../../StarKnights/StarEngine/src/Shaders/pp_frag_shader.vert")
+		engine.fileManager().resourceLocation("pp_vertex_shader.vert"),
+		engine.fileManager().resourceLocation("pp_frag_shader.vert"))
 {}

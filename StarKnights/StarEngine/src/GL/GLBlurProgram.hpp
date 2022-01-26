@@ -6,7 +6,7 @@
 class GLBlurProgram final : public GLProgram
 {
 public:
-    explicit GLBlurProgram();
+    explicit GLBlurProgram(const Engine& engine);
 };
 
 #endif GLBLUR_PROGRAM_HPP

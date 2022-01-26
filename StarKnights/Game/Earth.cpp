@@ -6,7 +6,7 @@
 Earth::Earth(Engine& engine)
 	: Node(engine)
 {
-	_land = std::make_shared<Sprite>(engine, "../../../../StarKnights/res/land.jpg");
+	_land = std::make_shared<Sprite>(engine, "land.jpg");
 	_contentSize = _land->getContentSize();
 	b2BodyDef groundDef;
 	groundDef.position.Set(0.0f, -10.0f);

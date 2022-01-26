@@ -13,6 +13,7 @@ class SchedulerManager;
 class UIManager;
 class AudioManager;
 class b2World;
+class FileManager;
 
 class Engine : public EventsManager::Delegate {
 public:
@@ -35,6 +36,7 @@ public:
 	[[nodiscard]] const Window& window() const;
 	[[nodiscard]] const SchedulerManager& schedulerManager() const;
 	[[nodiscard]] const AudioManager& audioManager() const;
+	[[nodiscard]] const FileManager& fileManager() const;
 	[[nodiscard]] b2World& world() const;
 
 	std::shared_ptr<Node> scene();
@@ -49,6 +51,7 @@ private:
 	std::unique_ptr<SchedulerManager> _schedulerManager;
 	std::unique_ptr<AudioManager> _audioManager;
 	std::unique_ptr<Renderer> _renderer;
+	std::unique_ptr<FileManager> _fileManager;
 	std::shared_ptr<UIManager> _UIManager;
 
 	mutable glm::vec2 _virtualResolution;

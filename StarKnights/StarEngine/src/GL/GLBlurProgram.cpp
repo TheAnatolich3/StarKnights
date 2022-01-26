@@ -1,7 +1,9 @@
+#include <Engine.hpp>
+#include <FileManager.hpp>
 #include "GLBlurProgram.hpp"
 
-GLBlurProgram::GLBlurProgram()
+GLBlurProgram::GLBlurProgram(const Engine& engine)
 	: GLProgram(
-		"../../../../StarKnights/StarEngine/src/Shaders/blur_vertex_shader.vert",
-		"../../../../StarKnights/StarEngine/src/Shaders/blur_frag_shader.vert")
+		engine.fileManager().resourceLocation("blur_vertex_shader.vert"),
+		engine.fileManager().resourceLocation("blur_frag_shader.vert"))
 { }

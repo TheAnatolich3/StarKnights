@@ -6,7 +6,7 @@
 class GLSpriteProgram final : public GLProgram
 {
 public:
-    explicit GLSpriteProgram();
+    explicit GLSpriteProgram(const Engine& engine);
 };
 
 

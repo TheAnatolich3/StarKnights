@@ -2,11 +2,13 @@
 #include <stdexcept>
 #include <SDL.h>
 #include <stbi/stb_image.h>
+#include <Engine.hpp>
+#include <FileManager.hpp>
 #include "Bitmap.hpp"
 
-Bitmap::Bitmap(std::string_view filepath)
+Bitmap::Bitmap(const Engine& engine, std::string_view filepath)
 {
-	SDL_RWops* file = SDL_RWFromFile(filepath.data(), "rb");
+	SDL_RWops* file = SDL_RWFromFile(engine.fileManager().resourceLocation(filepath.data()).c_str(), "rb");
 
 	if (file == nullptr)
 	{

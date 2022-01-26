@@ -1,7 +1,9 @@
+#include <Engine.hpp>
+#include <FileManager.hpp>
 #include "GLParticleProgram.hpp"
 
-GLParticleProgram::GLParticleProgram()
+GLParticleProgram::GLParticleProgram(const Engine& engine)
 	: GLProgram(
-		"../../../../StarKnights/StarEngine/src/Shaders/particle_vertex_shader.vert",
-		"../../../../StarKnights/StarEngine/src/Shaders/particle_frag_shader.vert")
+		engine.fileManager().resourceLocation("particle_vertex_shader.vert"),
+		engine.fileManager().resourceLocation("particle_frag_shader.vert"))
 { }

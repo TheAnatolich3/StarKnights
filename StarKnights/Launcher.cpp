@@ -6,13 +6,15 @@
 #include <Window.hpp>
 #include <Button.hpp>
 #include <UIManager.hpp>
+#include <FileManager.hpp>
 #include "Game/UserMenu.hpp"
 #include "Game/AudioMenu.hpp"
 #include "Game/Earth.hpp"
 
 int main(int argc, char* argv[])
-{
+{	
 	Engine engine{};
+	engine.fileManager().setFindPaths({ "StarKnights/res/music/", "StarKnights/res/", "StarKnights/StarEngine/src/Shaders/"});
 	engine.init("StarKnights", 1280, 720);
 	std::shared_ptr<UserMenu> user_menu = std::make_shared<UserMenu>(engine);
 	user_menu->init();
