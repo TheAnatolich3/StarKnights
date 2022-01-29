@@ -11,7 +11,6 @@ public:
 	void update(fseconds dt) override;
 private:
 	std::shared_ptr<Node> _land; 
-	b2Body* _ground;
 };
 
 #endif EARTH_HPP

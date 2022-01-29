@@ -8,7 +8,7 @@
 #include <SchedulerManager.hpp>
 
 #include <SDL.h>
-#include <GL/glew.h>
+#include <GL/GLHeaders.hpp>
 
 #include <GL/GLTexture.hpp>
 #include <GL/GLPpProgram.hpp>
@@ -32,14 +32,14 @@ GLRenderer::GLRenderer(const Engine& engine, SDL_Window* window)
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-//#if GL33
+#ifndef __ANDROID__
 	glewExperimental = GL_TRUE;
 	GLenum res = glewInit();
 	if (res != GLEW_OK)
 	{
 		throw std::runtime_error("Glew error");
 	}
-//#endif
+#endif
 	glEnable(GL_VERTEX_PROGRAM_POINT_SIZE);
 }
 

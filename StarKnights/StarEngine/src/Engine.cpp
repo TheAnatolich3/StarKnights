@@ -4,7 +4,6 @@
 #include <memory>
 #include <Node.hpp>
 #include <SchedulerManager.hpp>
-#include <box2d/box2d.h>
 #include <AudioManager.hpp>
 #include <UIManager.hpp>
 #include <FileManager.hpp>
@@ -13,7 +12,6 @@
 Engine::Engine()
 {
 	_fileManager = std::make_unique<FileManager>();
-	_world = std::make_unique<b2World>(b2Vec2(0.0f, -10.0f));
 	_schedulerManager = std::make_unique<SchedulerManager>();
 }
 
@@ -88,11 +86,6 @@ const SchedulerManager& Engine::schedulerManager() const
 std::shared_ptr<Node> Engine::scene()
 {
 	return _scene;
-}
-
-b2World& Engine::world() const
-{
-	return *_world;
 }
 
 const AudioManager& Engine::audioManager() const

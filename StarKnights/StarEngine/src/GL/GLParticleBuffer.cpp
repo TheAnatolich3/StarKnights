@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <GL/GLHeaders.hpp>
 #include "GlParticleBuffer.hpp"
 
 
@@ -36,7 +36,11 @@ void GLParticleBuffer::draw()
 {
     if (_count > 0)
     {
+#if defined __ANDROID__
+        glBindVertexArrayOES(_VAO);
+#else
         glBindVertexArray(_VAO);
+#endif
         glDrawArrays(GL_POINTS, 0, _count);
     }
 }

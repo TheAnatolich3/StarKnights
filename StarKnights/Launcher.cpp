@@ -1,7 +1,6 @@
 ﻿#include <iostream>
 #include <string_view>
 #include <Engine.hpp>
-#include <Box2d/Box2d.h>
 #include <Sprite.hpp>
 #include <Window.hpp>
 #include <Button.hpp>

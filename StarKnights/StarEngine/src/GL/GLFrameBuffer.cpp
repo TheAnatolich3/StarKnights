@@ -1,7 +1,7 @@
 #include <GL/GLTexture.hpp>
 #include <Engine.hpp>
 #include <Renderer.hpp>
-#include <GL/glew.h>
+#include <GL/GLHeaders.hpp>
 #include <Bitmap.hpp>
 #include "GLFrameBuffer.hpp"
 

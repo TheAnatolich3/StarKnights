@@ -4,9 +4,20 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Добавьте источник в исполняемый файл этого проекта.
-add_executable (StarKnights "Launcher.cpp" 
-                            "Game/Earth.hpp" 
-                            "Game/Earth.cpp" "Game/Tank.hpp" "Game/Tank.cpp" "Game/AudioMenu.hpp" "Game/AudioMenu.cpp" "Game/UserMenu.hpp" "Game/UserMenu.cpp")
+set(GAME_SRC "Launcher.cpp" 
+            "Game/Earth.hpp" 
+            "Game/Earth.cpp" 
+            "Game/Tank.hpp" 
+            "Game/Tank.cpp" 
+            "Game/AudioMenu.hpp" 
+            "Game/AudioMenu.cpp" 
+            "Game/UserMenu.hpp" 
+            "Game/UserMenu.cpp")
+if(ANDROID)
+    add_library (StarKnights SHARED ${GAME_SRC})
+else()
+    add_executable(StarKnights ${GAME_SRC})
+endif()
 
 set_target_properties(StarKnights PROPERTIES
     CXX_STANDARD 17

@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <GL/GLHeaders.hpp>
 #include <MeshData.hpp>
 #include <Engine.hpp>
 #include <Renderer.hpp>
@@ -6,9 +6,13 @@
 
 GLVertexBuffer::GLVertexBuffer(const Engine& engine, MeshData data) : _engine(engine)
 {
+#if defined __ANDROID__
+    glGenVertexArraysOES(1, &_VAO);
+    glBindVertexArrayOES(_VAO);
+#else
     glGenVertexArrays(1, &_VAO);
-
     glBindVertexArray(_VAO);
+#endif
 
     glGenBuffers(1, &_VBO);
 
@@ -41,7 +45,11 @@ GLVertexBuffer::GLVertexBuffer(const Engine& engine, MeshData data) : _engine(en
 
 void GLVertexBuffer::draw(size_t count, size_t pos)
 {
+#if defined __ANDROID__
+    glBindVertexArrayOES(_VAO);
+#else
     glBindVertexArray(_VAO);
+#endif
 
     if (_IBO != -1)
     {
@@ -64,7 +72,11 @@ GLVertexBuffer::~GLVertexBuffer()
         glDeleteBuffers(1, &_IBO);
     }
     
+#if defined __ANDROID__
+    glDeleteVertexArraysOES(1, &_VAO);
+#else
     glDeleteVertexArrays(1, &_VAO);
+#endif
 }
 
 void GLVertexBuffer::draw()

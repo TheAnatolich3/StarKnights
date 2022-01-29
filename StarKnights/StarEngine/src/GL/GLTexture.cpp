@@ -1,4 +1,4 @@
-#include <GL/glew.h>
+#include <GL/GLHeaders.hpp>
 #include <Bitmap.hpp>
 #include "GLTexture.hpp"
 
@@ -13,8 +13,13 @@ GLTexture::GLTexture(Bitmap bitmap)
 	{
 		switch (ch)
 		{
+#if defined __ANDROID__
+		case 1: return GL_R8_EXT;
+		case 2: return GL_RG_EXT;
+#else
 		case 1: return GL_R8;
 		case 2: return GL_RG;
+#endif
 		case 3: return GL_RGB;
 		case 4: return GL_RGBA;
 		}
@@ -24,8 +29,13 @@ GLTexture::GLTexture(Bitmap bitmap)
 	{
 		switch (ch)
 		{
+#if defined __ANDROID__
+		case 1: return GL_RED_EXT;
+		case 2: return GL_RG_EXT;
+#else
 		case 1: return GL_RED;
 		case 2: return GL_RG;
+#endif
 		case 3: return GL_RGB;
 		case 4: return GL_RGBA;
 		}

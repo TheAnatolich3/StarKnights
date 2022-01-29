@@ -1,5 +1,5 @@
 #include <iostream>
-#include <GL/glew.h>
+#include <GL/GLHeaders.hpp>
 #include <fstream>
 #include <string>
 #include <string_view>

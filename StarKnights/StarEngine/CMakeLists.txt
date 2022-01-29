@@ -66,7 +66,7 @@ add_library(StarEngine STATIC "src/Engine.hpp"
 							  "src/TaskManager.hpp" 
 							  "src/TaskManager.cpp"
 							  "src/Utils/ResourceManager.hpp"
-							  "src/FileManager.hpp" "src/FileManager.cpp")
+							  "src/FileManager.hpp" "src/FileManager.cpp" "src/GL/GLHeaders.hpp")
 
 #SDL
 if(NOT IOS)
@@ -75,19 +75,29 @@ if(NOT IOS)
 	set(SDL2_LIBRARY SDL2-static)
 endif()
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/glew)
-set(GLEW_LIBRARY libglew_static)
+if (MSVC)
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/glew)
+	set(GLEW_LIBRARY libglew_static)
+
+	target_link_libraries(StarEngine PRIVATE ${GLEW_LIBRARY})
+    find_package(OpenGL REQUIRED)
+else()
+	find_library(OpenGL REQUIRED)
+    target_link_libraries(StarEngine PRIVATE ${OPENGL_LIBRARY})
+endif()
 
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/imgui)
 set(IMGUI_LIBRARY imgui)
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/box2d-main)
-set(BOX2D_LIBRARY box2d)
+if (NOT ANDROID)
+	add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/libs/box2d-main)
+	set(BOX2D_LIBRARY box2d)
+
+	target_link_libraries(StarEngine PUBLIC ${BOX2D_LIBRARY})
+endif()
 
 target_link_libraries(StarEngine PUBLIC
-	${SDL2MAIN_LIBRARY} ${SDL2_LIBRARY} ${GLEW_LIBRARY} ${IMGUI_LIBRARY} ${BOX2D_LIBRARY})
-
-find_package(OpenGL REQUIRED)
+	${SDL2MAIN_LIBRARY} ${SDL2_LIBRARY} ${IMGUI_LIBRARY})
 
 target_include_directories(StarEngine
 	PUBLIC
@@ -97,5 +107,3 @@ target_include_directories(StarEngine
 	PRIVATE
 		${CMAKE_CURRENT_SOURCE_DIR}/libs/SDL2/include
 		${CMAKE_CURRENT_SOURCE_DIR}/libs/glew/include)
-
-set(SYSTEM_LIBS -mwindows ${GLEW_LIBRARY} ${OPENGL_LIBRARIES})

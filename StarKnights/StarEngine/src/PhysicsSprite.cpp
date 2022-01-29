@@ -4,26 +4,12 @@
 #include <Window.hpp>
 #include <ShaderProgram.hpp>
 #include <MeshData.hpp>
-#include <box2d/box2d.h>
 
 #include "PhysicsSprite.hpp"
 
 PhysicsSprite::PhysicsSprite(const Engine& engine, std::string_view filepath)
     : Node(engine)
 {
-    b2BodyDef boxDef;
-    boxDef.type = b2_dynamicBody; 
-    boxDef.position.Set(0.0f, 4.0f);
-    _box = engine.world().CreateBody(&boxDef); // любой
-    b2PolygonShape boxShape;
-    boxShape.SetAsBox(2.0f / 2, 2.0f / 2);
-    b2FixtureDef boxFixDef; // создаем определение фикции (фрагмента тела)
-    boxFixDef.shape = &boxShape; // задаем форму...
-    boxFixDef.density = 1.0f; // ... плотность...
-    boxFixDef.friction = 0.3f;
-
-    _box->CreateFixture(&boxFixDef);
-
     Bitmap bitmap(engine, filepath);
 
     _contentSize = bitmap.getSize();
